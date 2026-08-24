@@ -1,0 +1,200 @@
+[
+  {
+    "id": "diarrhea",
+    "symptom_name": "Diarrhea / Loose Stool",
+    "species": ["Dog", "Cat"],
+    "category": "Digestive",
+    "moderate_duration_threshold": 24,
+    "red_flag_triggers": [
+      "blood_in_stool",
+      "vomiting_blood",
+      "lethargy_severe",
+      "known_toxin_ingestion",
+      "puppy_under_12_weeks",
+      "kitten_under_12_weeks",
+      "pale_gums",
+      "unable_to_keep_water_down"
+    ],
+    "red_flag_options": [
+      {"id": "blood_in_stool", "label": "Blood or dark tar-like stool visible"},
+      {"id": "vomiting_blood", "label": "Vomiting or retching alongside diarrhea"},
+      {"id": "lethargy_severe", "label": "Pet is unusually limp, unresponsive, or extremely weak"},
+      {"id": "known_toxin_ingestion", "label": "Suspected ingestion of toxic plants, chemicals, or foreign items"},
+      {"id": "puppy_under_12_weeks", "label": "Pet is a very young puppy/kitten under 12 weeks"},
+      {"id": "pale_gums", "label": "Gums are pale, white, or blue instead of healthy pink"}
+    ],
+    "home_care_steps": [
+      "Keep fresh, clean water accessible at all times to prevent dehydration.",
+      "Withhold food for 12-24 hours for adult dogs ONLY (never fast puppies, kittens, or seniors).",
+      "Once feeding resumes, offer small bland meals (plain boiled chicken breast and plain white rice) for 2 to 3 days.",
+      "Ensure quiet rest in a warm, comfortable room.",
+      "Track frequency, color, and consistency of bowel movements for your vet."
+    ],
+    "escalation_window": "24 hours",
+    "escalation_message": "If diarrhea persists past 24 hours, contains blood, or your pet exhibits lethargy, seek veterinary care promptly."
+  },
+  {
+    "id": "vomiting",
+    "symptom_name": "Vomiting",
+    "species": ["Dog", "Cat"],
+    "category": "Digestive",
+    "moderate_duration_threshold": 12,
+    "red_flag_triggers": [
+      "repeated_unproductive_retching",
+      "vomiting_blood",
+      "swallowed_foreign_object",
+      "bloated_hard_abdomen",
+      "extreme_weakness",
+      "puppy_kitten_under_16_weeks"
+    ],
+    "red_flag_options": [
+      {"id": "repeated_unproductive_retching", "label": "Repeated non-stop retching without anything coming up (bloat risk)"},
+      {"id": "vomiting_blood", "label": "Vomiting bright red blood or coffee-ground material"},
+      {"id": "swallowed_foreign_object", "label": "Suspected swallowing of toys, string, socks, or human medicine"},
+      {"id": "bloated_hard_abdomen", "label": "Abdomen looks swollen, hard, or hurts when touched"},
+      {"id": "extreme_weakness", "label": "Pet cannot stand or is severely lethargic"}
+    ],
+    "home_care_steps": [
+      "Withhold food for 6-12 hours for adult pets; allow tiny licks of water or ice chips.",
+      "Never withhold water for young puppies, kittens, or seniors for more than 2-3 hours without vet advice.",
+      "Reintroduce small portions of bland food (plain chicken & rice or prescribed recovery food) gradually.",
+      "Do not give any over-the-counter human medicines."
+    ],
+    "escalation_window": "12 to 24 hours",
+    "escalation_message": "Single episodes of vomiting can happen, but repeated vomiting within hours requires immediate vet evaluation."
+  },
+  {
+    "id": "lethargy",
+    "symptom_name": "Lethargy / Low Energy",
+    "species": ["Dog", "Cat"],
+    "category": "Behavior & Energy",
+    "moderate_duration_threshold": 24,
+    "red_flag_triggers": [
+      "unresponsive_to_touch_voice",
+      "collapse_inability_to_stand",
+      "labored_heavy_breathing",
+      "pale_blue_gums",
+      "high_fever_heat"
+    ],
+    "red_flag_options": [
+      {"id": "unresponsive_to_touch_voice", "label": "Unresponsive or barely opens eyes when called or touched"},
+      {"id": "collapse_inability_to_stand", "label": "Collapsed or unable to support weight on legs"},
+      {"id": "labored_heavy_breathing", "label": "Rapid, heavy, or open-mouth panting/gasping breathing"},
+      {"id": "pale_blue_gums", "label": "Gums are pale gray, blue, or deep purple"}
+    ],
+    "home_care_steps": [
+      "Provide a peaceful, dark, stress-free sleeping area with fresh water nearby.",
+      "Gently check capillary refill time (press gum for 2 sec; pink color should return within 2 seconds).",
+      "Encourage light hydration with water or ice cubes.",
+      "Record temperature if you have a digital pet thermometer."
+    ],
+    "escalation_window": "24 hours",
+    "escalation_message": "Lethargy lasting more than 24 hours is a primary sign of underlying illness and warrants a professional checkup."
+  },
+  {
+    "id": "itching_scratching",
+    "symptom_name": "Excessive Scratching / Itching / Skin Redness",
+    "species": ["Dog", "Cat"],
+    "category": "Skin & Coat",
+    "moderate_duration_threshold": 48,
+    "red_flag_triggers": [
+      "open_bleeding_wounds",
+      "facial_swelling_hives",
+      "foul_odor_pus_from_skin",
+      "sudden_anaphylaxis_after_sting"
+    ],
+    "red_flag_options": [
+      {"id": "facial_swelling_hives", "label": "Facial swelling, swollen muzzle, or hives after insect sting"},
+      {"id": "open_bleeding_wounds", "label": "Hot spots with active bleeding, open sores, or deep skin tears"},
+      {"id": "foul_odor_pus_from_skin", "label": "Pus, yellow discharge, or foul smell from ears or skin folds"}
+    ],
+    "home_care_steps": [
+      "Inspect coat for visible fleas, ticks, or burrs.",
+      "Use an Elizabethan collar (cone) to prevent self-mutilation or biting at hot spots.",
+      "Wipe paws and coat with a damp warm towel after outdoor walks to clear environmental pollen.",
+      "Ensure flea and tick preventative is up to date."
+    ],
+    "escalation_window": "48 hours",
+    "escalation_message": "If skin redness worsens or turns into moist hot spots, schedule a vet appointment for allergy or infection evaluation."
+  },
+  {
+    "id": "coughing_sneezing",
+    "symptom_name": "Coughing / Sneezing / Nasal Discharge",
+    "species": ["Dog", "Cat"],
+    "category": "Respiratory",
+    "moderate_duration_threshold": 48,
+    "red_flag_triggers": [
+      "gasping_open_mouth_breathing",
+      "blue_purple_gums",
+      "coughing_up_blood",
+      "stridor_choking_noises"
+    ],
+    "red_flag_options": [
+      {"id": "gasping_open_mouth_breathing", "label": "Open-mouth breathing, flaring nostrils, or abdominal effort to breathe"},
+      {"id": "blue_purple_gums", "label": "Gums or tongue are blue/purple (lack of oxygen)"},
+      {"id": "coughing_up_blood", "label": "Coughing up foam, blood, or pinkish fluid"},
+      {"id": "stridor_choking_noises", "label": "High-pitched choking noise or inability to get air"}
+    ],
+    "home_care_steps": [
+      "Keep pet indoors in a clean, smoke-free, dust-free environment.",
+      "Allow pet to sit in a humid bathroom while running a warm shower (steam therapy for 10-15 min).",
+      "Keep nose and eyes gently clean using a soft moist cotton pad.",
+      "Isolate from other household pets if infectious kennel cough / upper respiratory infection is suspected."
+    ],
+    "escalation_window": "48 hours",
+    "escalation_message": "Persistent coughing can indicate kennel cough, feline asthma, or heart conditions. See a vet if coughing persists."
+  },
+  {
+    "id": "limping_lameness",
+    "symptom_name": "Limping / Favoring a Leg",
+    "species": ["Dog", "Cat"],
+    "category": "Injury & Mobility",
+    "moderate_duration_threshold": 24,
+    "red_flag_triggers": [
+      "inability_to_bear_weight",
+      "visible_bone_deformity",
+      "severe_crying_in_pain",
+      "cold_limb_dragging_leg"
+    ],
+    "red_flag_options": [
+      {"id": "inability_to_bear_weight", "label": "Completely non-weight bearing or holding leg up high"},
+      {"id": "visible_bone_deformity", "label": "Limb appears bent, misaligned, or fractured"},
+      {"id": "severe_crying_in_pain", "label": "Vocalizing, crying, or snapping when leg is touched"},
+      {"id": "cold_limb_dragging_leg", "label": "Hind leg is cold to touch or dragged (Feline Aortic Thromboembolism risk in cats)"}
+    ],
+    "home_care_steps": [
+      "Restrict activity immediately: keep pet strictly on leash or in a comfortable small room/crate.",
+      "Inspect paw pads carefully for thorns, cut pads, or torn nails.",
+      "Do NOT attempt to splint, bandage tightly, or give human pain medications (ibuprofen/paracetamol are extremely toxic).",
+      "Apply cold compress to minor joint swelling for 10-15 minutes if pet tolerates it."
+    ],
+    "escalation_window": "24 hours",
+    "escalation_message": "Limping that does not improve after 24 hours of rest requires orthopedic examination and X-rays by a veterinarian."
+  },
+  {
+    "id": "eye_discharge",
+    "symptom_name": "Eye Squinting / Discharge / Redness",
+    "species": ["Dog", "Cat"],
+    "category": "Eye & Ear",
+    "moderate_duration_threshold": 12,
+    "red_flag_triggers": [
+      "cloudy_cornea_blue_film",
+      "eye_held_completely_shut",
+      "bulging_swollen_eye",
+      "foreign_object_embedded"
+    ],
+    "red_flag_options": [
+      {"id": "cloudy_cornea_blue_film", "label": "Eye surface looks hazy, cloudy blue, or ulcerated"},
+      {"id": "eye_held_completely_shut", "label": "Eye is squinted shut or pet rubs eye constantly against carpet"},
+      {"id": "bulging_swollen_eye", "label": "Eye socket appears swollen, protruding, or enlarged"},
+      {"id": "foreign_object_embedded", "label": "Visible scratch, cut, or foreign debris in eye"}
+    ],
+    "home_care_steps": [
+      "Place an Elizabethan collar (cone) on pet immediately to prevent pawing and corneal scratch worsening.",
+      "Gently wipe outer tear drainage from around the eye using plain sterile saline on a clean gauze.",
+      "Do not use leftover human or old pet eye drops."
+    ],
+    "escalation_window": "12 hours",
+    "escalation_message": "Eye injuries escalate rapidly into corneal ulcers or vision loss. Prompt vet evaluation is critical for squinting or cloudy eyes."
+  }
+]

@@ -1,0 +1,182 @@
+[
+  {
+    "breed_name": "Golden Retriever",
+    "species": "Dog",
+    "size_category": "Large",
+    "avg_adult_weight_kg": 30.0,
+    "energy_level": "High",
+    "coat_type": "Double coat",
+    "senior_age_threshold": 7.0,
+    "common_health_risks": ["Hip Dysplasia", "Cancer (Hemangiosarcoma)", "Hypothyroidism", "Ear Infections"]
+  },
+  {
+    "breed_name": "Labrador Retriever",
+    "species": "Dog",
+    "size_category": "Large",
+    "avg_adult_weight_kg": 32.0,
+    "energy_level": "High",
+    "coat_type": "Double coat",
+    "senior_age_threshold": 7.0,
+    "common_health_risks": ["Obesity", "Hip & Elbow Dysplasia", "Progressive Retinal Atrophy", "Bloat (GDV)"]
+  },
+  {
+    "breed_name": "German Shepherd",
+    "species": "Dog",
+    "size_category": "Large",
+    "avg_adult_weight_kg": 34.0,
+    "energy_level": "High",
+    "coat_type": "Double coat",
+    "senior_age_threshold": 7.0,
+    "common_health_risks": ["Hip & Elbow Dysplasia", "Degenerative Myelopathy", "Bloat (GDV)", "Exocrine Pancreatic Insufficiency"]
+  },
+  {
+    "breed_name": "French Bulldog",
+    "species": "Dog",
+    "size_category": "Small",
+    "avg_adult_weight_kg": 11.0,
+    "energy_level": "Medium",
+    "coat_type": "Short",
+    "senior_age_threshold": 9.0,
+    "common_health_risks": ["Brachycephalic Airway Syndrome", "Intervertebral Disc Disease (IVDD)", "Skin Fold Dermatitis", "Heat Sensitivity"]
+  },
+  {
+    "breed_name": "Beagle",
+    "species": "Dog",
+    "size_category": "Medium",
+    "avg_adult_weight_kg": 12.0,
+    "energy_level": "High",
+    "coat_type": "Short",
+    "senior_age_threshold": 9.0,
+    "common_health_risks": ["Epilepsy", "Hypothyroidism", "Ear Infections", "Intervertebral Disc Disease"]
+  },
+  {
+    "breed_name": "Poodle (Standard)",
+    "species": "Dog",
+    "size_category": "Large",
+    "avg_adult_weight_kg": 25.0,
+    "energy_level": "High",
+    "coat_type": "Curly",
+    "senior_age_threshold": 8.0,
+    "common_health_risks": ["Addison's Disease", "Sebaceous Adenitis", "Gastric Torsion", "Cataracts"]
+  },
+  {
+    "breed_name": "Poodle (Toy / Miniature)",
+    "species": "Dog",
+    "size_category": "Small",
+    "avg_adult_weight_kg": 5.0,
+    "energy_level": "Medium",
+    "coat_type": "Curly",
+    "senior_age_threshold": 10.0,
+    "common_health_risks": ["Patellar Luxation", "Tracheal Collapse", "Dental Disease", "Progressive Retinal Atrophy"]
+  },
+  {
+    "breed_name": "Chihuahua",
+    "species": "Dog",
+    "size_category": "Small",
+    "avg_adult_weight_kg": 2.5,
+    "energy_level": "Medium",
+    "coat_type": "Short",
+    "senior_age_threshold": 11.0,
+    "common_health_risks": ["Patellar Luxation", "Hypoglycemia", "Heart Valve Disease (MMVD)", "Dental Disease"]
+  },
+  {
+    "breed_name": "Dachshund",
+    "species": "Dog",
+    "size_category": "Small",
+    "avg_adult_weight_kg": 8.0,
+    "energy_level": "Medium",
+    "coat_type": "Short",
+    "senior_age_threshold": 10.0,
+    "common_health_risks": ["Intervertebral Disc Disease (IVDD)", "Obesity", "Patellar Luxation", "Cataracts"]
+  },
+  {
+    "breed_name": "Shih Tzu",
+    "species": "Dog",
+    "size_category": "Small",
+    "avg_adult_weight_kg": 6.0,
+    "energy_level": "Low",
+    "coat_type": "Long",
+    "senior_age_threshold": 10.0,
+    "common_health_risks": ["Brachycephalic Issues", "Brachycephalic Ocular Syndrome", "Brachycephalic Airway", "Dental Disease"]
+  },
+  {
+    "breed_name": "Mixed Breed Dog",
+    "species": "Dog",
+    "size_category": "Medium",
+    "avg_adult_weight_kg": 18.0,
+    "energy_level": "Medium",
+    "coat_type": "Medium",
+    "senior_age_threshold": 9.0,
+    "common_health_risks": ["General Wellness Check", "Dental Disease", "Fleas & Parasites"]
+  },
+  {
+    "breed_name": "Domestic Shorthair (Tabby / Cat)",
+    "species": "Cat",
+    "size_category": "Medium",
+    "avg_adult_weight_kg": 4.5,
+    "energy_level": "Medium",
+    "coat_type": "Short",
+    "senior_age_threshold": 11.0,
+    "common_health_risks": ["Feline Lower Urinary Tract Disease (FLUTD)", "Chronic Kidney Disease", "Dental Disease", "Obesity"]
+  },
+  {
+    "breed_name": "Maine Coon",
+    "species": "Cat",
+    "size_category": "Large",
+    "avg_adult_weight_kg": 7.5,
+    "energy_level": "Medium",
+    "coat_type": "Long",
+    "senior_age_threshold": 10.0,
+    "common_health_risks": ["Hypertrophic Cardiomyopathy (HCM)", "Hip Dysplasia", "Spinal Muscular Atrophy", "Polycystic Kidney Disease"]
+  },
+  {
+    "breed_name": "Siamese",
+    "species": "Cat",
+    "size_category": "Small",
+    "avg_adult_weight_kg": 3.8,
+    "energy_level": "High",
+    "coat_type": "Short",
+    "senior_age_threshold": 11.0,
+    "common_health_risks": ["Amyloidosis", "Asthma / Bronchial Disease", "Progressive Retinal Atrophy", "Dental Disease"]
+  },
+  {
+    "breed_name": "Persian",
+    "species": "Cat",
+    "size_category": "Medium",
+    "avg_adult_weight_kg": 4.2,
+    "energy_level": "Low",
+    "coat_type": "Long",
+    "senior_age_threshold": 10.0,
+    "common_health_risks": ["Polycystic Kidney Disease (PKD)", "Brachycephalic Breathing Issues", "Progressive Retinal Atrophy", "Hairballs & Matting"]
+  },
+  {
+    "breed_name": "Bengal",
+    "species": "Cat",
+    "size_category": "Medium",
+    "avg_adult_weight_kg": 5.0,
+    "energy_level": "High",
+    "coat_type": "Short",
+    "senior_age_threshold": 11.0,
+    "common_health_risks": ["Hypertrophic Cardiomyopathy (HCM)", "Progressive Retinal Atrophy", "Patellar Luxation"]
+  },
+  {
+    "breed_name": "Ragdoll",
+    "species": "Cat",
+    "size_category": "Large",
+    "avg_adult_weight_kg": 6.5,
+    "energy_level": "Low",
+    "coat_type": "Long",
+    "senior_age_threshold": 11.0,
+    "common_health_risks": ["Hypertrophic Cardiomyopathy (HCM)", "Feline Lower Urinary Tract Disease", "Hairballs"]
+  },
+  {
+    "breed_name": "Mixed Breed Cat",
+    "species": "Cat",
+    "size_category": "Medium",
+    "avg_adult_weight_kg": 4.5,
+    "energy_level": "Medium",
+    "coat_type": "Medium",
+    "senior_age_threshold": 11.0,
+    "common_health_risks": ["Dental Disease", "Hairballs", "Chronic Kidney Disease in Seniors"]
+  }
+]

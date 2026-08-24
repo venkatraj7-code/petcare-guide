@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawGuide — Personal New-Pet Care Assistant</title>
+    <meta name="description" content="Personalized pet care guides, safe symptom triage, and nearby vet clinic locator for new pet parents.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Leaflet CSS for Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+    <!-- App Styles -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand" id="brand-logo">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-paw"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">PawGuide</span>
+                    <span class="brand-tagline">Pet Care Assistant</span>
+                </div>
+            </div>
+
+            <!-- Pet Selector & Onboarding trigger -->
+            <div class="pet-selector-wrap" id="pet-selector-wrap">
+                <button class="pet-pill-btn" id="pet-pill-btn">
+                    <i class="fa-solid fa-dog" id="pet-pill-icon"></i>
+                    <span id="pet-pill-name">Buddy</span>
+                    <i class="fa-solid fa-chevron-down pill-arrow"></i>
+                </button>
+                <div class="pet-dropdown" id="pet-dropdown">
+                    <div id="pet-list-container"></div>
+                    <button class="btn-add-pet" id="btn-add-new-pet">
+                        <i class="fa-solid fa-plus"></i> Add Another Pet
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Navigation Tabs -->
+            <nav class="main-nav">
+                <button class="nav-tab active" data-tab="dashboard">
+                    <i class="fa-solid fa-border-all"></i> <span>Dashboard</span>
+                </button>
+                <button class="nav-tab" data-tab="triage">
+                    <i class="fa-solid fa-heart-pulse"></i> <span>Symptom Check</span>
+                </button>
+                <button class="nav-tab" data-tab="vet-finder">
+                    <i class="fa-solid fa-hospital-user"></i> <span>Find Vets</span>
+                </button>
+                <button class="nav-tab" data-tab="reminders">
+                    <i class="fa-solid fa-bell"></i> <span>Reminders</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Body -->
+    <main class="main-content">
+        <div class="content-container">
+
+            <!-- Global Emergency Quick Action Banner -->
+            <div class="emergency-quick-bar" id="emergency-quick-bar">
+                <div class="emergency-bar-info">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>Is your pet experiencing a medical emergency?</span>
+                </div>
+                <button class="btn-emergency-vet" id="btn-quick-vet-search">
+                    <i class="fa-solid fa-location-crosshairs"></i> Find Emergency Vet Now
+                </button>
+            </div>
+
+            <!-- TAB 1: DASHBOARD / CARE GUIDE -->
+            <section class="tab-pane active" id="pane-dashboard">
+                <!-- Pet Overview Card -->
+                <div class="pet-hero-card">
+                    <div class="hero-pet-avatar" id="hero-pet-avatar">
+                        <i class="fa-solid fa-dog"></i>
+                    </div>
+                    <div class="hero-pet-details">
+                        <div class="hero-title-row">
+                            <h1 id="hero-pet-name">Buddy</h1>
+                            <span class="badge stage-badge" id="hero-pet-stage">Adult Dog</span>
+                            <span class="badge breed-badge" id="hero-pet-breed">Golden Retriever</span>
+                        </div>
+                        <div class="hero-stats-row">
+                            <div class="stat-pill"><i class="fa-solid fa-weight-hanging"></i> <span id="hero-pet-weight">30 kg</span></div>
+                            <div class="stat-pill"><i class="fa-solid fa-cake-candles"></i> <span id="hero-pet-age">2 yrs</span></div>
+                            <div class="stat-pill"><i class="fa-solid fa-bolt"></i> <span id="hero-pet-activity">High Activity</span></div>
+                        </div>
+                    </div>
+                    <div class="hero-actions">
+                        <button class="btn-triage-launch" id="btn-launch-triage">
+                            <i class="fa-solid fa-stethoscope"></i> Something feels off?
+                        </button>
+                    </div>
+                </div>
+
+                <div class="dashboard-header">
+                    <h2>Personalized Care Guide</h2>
+                    <p class="subtitle">Customized nutrition, exercise, grooming, and health schedule</p>
+                </div>
+
+                <!-- 4 Core Summary Cards Grid -->
+                <div class="cards-grid">
+
+                    <!-- CARD 1: FEEDING TODAY -->
+                    <div class="guide-card card-feeding">
+                        <div class="card-header">
+                            <div class="card-icon-badge icon-feeding"><i class="fa-solid fa-bowl-food"></i></div>
+                            <div class="card-title-group">
+                                <h3>Feeding & Nutrition</h3>
+                                <span class="card-subtitle">Daily Calorie & Portion Plan</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="highlight-stat-box">
+                                <div class="stat-item">
+                                    <span class="stat-val" id="card-calories">1,620</span>
+                                    <span class="stat-lbl">Calories / day</span>
+                                </div>
+                                <div class="stat-divider"></div>
+                                <div class="stat-item">
+                                    <span class="stat-val" id="card-meals">2</span>
+                                    <span class="stat-lbl">Meals / day</span>
+                                </div>
+                            </div>
+                            <div class="info-line">
+                                <strong>Recommended Diet:</strong>
+                                <p id="card-food-type">High-quality protein formula balanced for large breed adults.</p>
+                            </div>
+                            <div class="info-line">
+                                <strong>Portion Guidance:</strong>
+                                <p id="card-portion-note">Split daily calories into 2 equal portions morning & evening.</p>
+                            </div>
+                            <div class="avoid-list-wrap">
+                                <strong><i class="fa-solid fa-ban text-danger"></i> Foods to Avoid:</strong>
+                                <div class="pills-flex" id="card-avoid-pills">
+                                    <!-- Pills rendered by JS -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn-card-detail" data-modal="modal-feeding-detail">
+                                View Nutrition Breakdown <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CARD 2: EXERCISE & ACTIVITY -->
+                    <div class="guide-card card-exercise">
+                        <div class="card-header">
+                            <div class="card-icon-badge icon-exercise"><i class="fa-solid fa-person-running"></i></div>
+                            <div class="card-title-group">
+                                <h3>Exercise & Play</h3>
+                                <span class="card-subtitle">Daily Physical Target</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="exercise-target-box">
+                                <i class="fa-solid fa-stopwatch"></i>
+                                <div>
+                                    <div class="target-title">Daily Activity Target</div>
+                                    <div class="target-val" id="card-exercise-target">45 - 60 Mins</div>
+                                </div>
+                            </div>
+                            <div class="info-line">
+                                <strong>Breed Energy Level:</strong>
+                                <span class="badge energy-badge" id="card-energy-level">High Energy</span>
+                            </div>
+                            <div class="info-line">
+                                <strong>Activity Recommendation:</strong>
+                                <p id="card-exercise-desc">2 active outdoor walks daily with interactive fetch or swimming sessions.</p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn-card-detail" data-modal="modal-exercise-detail">
+                                Activity Ideas & Tips <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CARD 3: GROOMING & COAT CARE -->
+                    <div class="guide-card card-grooming">
+                        <div class="card-header">
+                            <div class="card-icon-badge icon-grooming"><i class="fa-solid fa-shower"></i></div>
+                            <div class="card-title-group">
+                                <h3>Grooming & Coat</h3>
+                                <span class="card-subtitle">Coat Maintenance</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="coat-type-box">
+                                <span>Coat Type:</span> <strong id="card-coat-type">Double coat</strong>
+                            </div>
+                            <div class="info-line">
+                                <strong>Brushing Schedule:</strong>
+                                <p id="card-grooming-desc">Brush 2-3 times per week with a slicker brush & undercoat rake.</p>
+                            </div>
+                            <div class="grooming-checklist-mini">
+                                <div class="check-item"><i class="fa-solid fa-check text-teal"></i> Ears: Weekly check</div>
+                                <div class="check-item"><i class="fa-solid fa-check text-teal"></i> Nails: Trim every 3-4 weeks</div>
+                                <div class="check-item"><i class="fa-solid fa-check text-teal"></i> Teeth: Daily brushing</div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn-card-detail" data-modal="modal-grooming-detail">
+                                Full Grooming Routine <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CARD 4: HEALTH WATCHLIST & VACCINES -->
+                    <div class="guide-card card-health">
+                        <div class="card-header">
+                            <div class="card-icon-badge icon-health"><i class="fa-solid fa-notes-medical"></i></div>
+                            <div class="card-title-group">
+                                <h3>Health Watchlist</h3>
+                                <span class="card-subtitle">Vaccines & Vet Checkup</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="vet-checkup-banner">
+                                <i class="fa-solid fa-calendar-check"></i>
+                                <div>
+                                    <div class="checkup-lbl">Next Routine Vet Visit</div>
+                                    <strong id="card-next-checkup">Annually for physical exam</strong>
+                                </div>
+                            </div>
+                            <div class="info-line">
+                                <strong>Breed Predispositions:</strong>
+                                <div class="pills-flex margin-top-xs" id="card-watch-pills">
+                                    <!-- Risks pills rendered by JS -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn-card-detail" data-modal="modal-health-detail">
+                                View Vaccine Schedule <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- TAB 2: SYMPTOM TRIAGE TOOL -->
+            <section class="tab-pane" id="pane-triage">
+                <div class="triage-wrapper">
+                    <div class="triage-header">
+                        <div class="triage-badge"><i class="fa-solid fa-shield-cat"></i> Safe Rule-Based Assistant</div>
+                        <h2>Symptom Triage & Health Advisor</h2>
+                        <p>Answer a few questions to get safe, non-prescriptive home guidance or immediate vet directions.</p>
+                    </div>
+
+                    <!-- Disclaimer Notice -->
+                    <div class="triage-disclaimer-box">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span><strong>Important Safety Note:</strong> PawGuide is not a substitute for veterinary diagnosis. This tool never prescribes medications or dosages. For severe symptoms, always consult a licensed vet.</span>
+                    </div>
+
+                    <!-- Interactive Triage Stepper -->
+                    <div class="triage-card">
+                        <!-- Step 1: Select Symptom -->
+                        <div class="triage-step active" id="triage-step-1">
+                            <h3><span class="step-num">1</span> Select What's Happening</h3>
+                            
+                            <div class="species-toggle-row">
+                                <span>Pet being checked:</span>
+                                <strong id="triage-pet-display">Buddy (Adult Dog)</strong>
+                            </div>
+
+                            <div class="category-pills" id="category-pills">
+                                <button class="cat-pill active" data-cat="all">All Symptoms</button>
+                                <button class="cat-pill" data-cat="Digestive">Digestive</button>
+                                <button class="cat-pill" data-cat="Skin & Coat">Skin & Coat</button>
+                                <button class="cat-pill" data-cat="Respiratory">Respiratory</button>
+                                <button class="cat-pill" data-cat="Injury & Mobility">Injury & Mobility</button>
+                                <button class="cat-pill" data-cat="Eye & Ear">Eye & Ear</button>
+                                <button class="cat-pill" data-cat="Behavior & Energy">Behavior</button>
+                            </div>
+
+                            <div class="symptoms-grid" id="symptoms-grid">
+                                <!-- Symptoms list populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Duration & Red Flags -->
+                        <div class="triage-step" id="triage-step-2">
+                            <button class="btn-back" id="btn-back-step-1"><i class="fa-solid fa-chevron-left"></i> Change Symptom</button>
+                            
+                            <div class="selected-symptom-banner">
+                                <i class="fa-solid fa-stethoscope"></i>
+                                <div>
+                                    <span class="sub">Selected Symptom:</span>
+                                    <h3 id="triage-selected-title">Diarrhea / Loose Stool</h3>
+                                </div>
+                            </div>
+
+                            <div class="form-group margin-top-lg">
+                                <label for="symptom-duration">How long has this symptom been occurring?</label>
+                                <div class="range-wrap">
+                                    <input type="range" id="symptom-duration" min="1" max="72" value="12" step="1">
+                                    <div class="range-val"><span id="duration-val-text">12</span> Hours</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group margin-top-lg">
+                                <label>Check if any of these critical red flag signs are present:</label>
+                                <div class="red-flags-list" id="red-flags-container">
+                                    <!-- Red flag checkboxes rendered by JS -->
+                                </div>
+                            </div>
+
+                            <div class="triage-nav-row">
+                                <button class="btn-primary btn-large" id="btn-submit-triage">
+                                    Evaluate Health Status <i class="fa-solid fa-bolt"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Triage Result Card -->
+                        <div class="triage-step" id="triage-step-3">
+                            <div class="result-card" id="triage-result-card">
+                                <div class="result-status-header" id="result-status-header">
+                                    <div class="result-status-icon" id="result-status-icon"><i class="fa-solid fa-shield-check"></i></div>
+                                    <div>
+                                        <span class="result-tag" id="result-tag">MILD CONDITION</span>
+                                        <h3 id="result-title">Monitor at Home</h3>
+                                    </div>
+                                </div>
+
+                                <div class="result-body">
+                                    <div class="result-message" id="result-message">
+                                        Monitor for now. Seek vet care if it doesn't improve in 24 hours or worsens.
+                                    </div>
+
+                                    <!-- Emergency Vet Trigger Banner (Rendered when EMERGENCY) -->
+                                    <div class="emergency-action-card hidden" id="emergency-action-card">
+                                        <div class="emergency-text">
+                                            <i class="fa-solid fa-triangle-exclamation"></i>
+                                            <div>
+                                                <strong>Immediate Veterinary Care Required</strong>
+                                                <p>Do not delay care. Find emergency clinics near your current location.</p>
+                                            </div>
+                                        </div>
+                                        <button class="btn-emergency-action" id="btn-trigger-vet-map">
+                                            <i class="fa-solid fa-hospital"></i> Find Nearest Vet Clinics Now
+                                        </button>
+                                    </div>
+
+                                    <!-- Safe Home Care Steps (Rendered when MILD or MODERATE) -->
+                                    <div class="home-care-section" id="home-care-section">
+                                        <h4><i class="fa-solid fa-hand-holding-medical"></i> Safe Home Care Guidelines:</h4>
+                                        <ul class="home-care-list" id="home-care-list">
+                                            <!-- Steps rendered by JS -->
+                                        </ul>
+                                    </div>
+
+                                    <div class="escalation-box" id="escalation-box">
+                                        <i class="fa-solid fa-clock-rotate-left"></i>
+                                        <span id="escalation-text">If symptoms continue past 24 hours, contact your vet.</span>
+                                    </div>
+                                </div>
+
+                                <div class="result-footer">
+                                    <button class="btn-secondary" id="btn-restart-triage">
+                                        <i class="fa-solid fa-arrow-rotate-left"></i> Check Another Symptom
+                                    </button>
+                                    <button class="btn-outline" id="btn-view-clinics-optional">
+                                        <i class="fa-solid fa-map-location-dot"></i> View Nearby Clinics
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: NEARBY VET LOCATOR -->
+            <section class="tab-pane" id="pane-vet-finder">
+                <div class="vet-finder-wrapper">
+                    <div class="vet-header">
+                        <h2>Nearby Vet & Emergency Clinic Locator</h2>
+                        <p>Locate verified veterinary hospitals, 24/7 emergency centers, and wellness clinics nearby.</p>
+                    </div>
+
+                    <!-- Search Controls Bar -->
+                    <div class="vet-search-bar">
+                        <button class="btn-use-location" id="btn-use-location">
+                            <i class="fa-solid fa-crosshairs"></i> Use My Location
+                        </button>
+                        <div class="search-input-wrap">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="vet-city-input" placeholder="Search by city, pincode, or street address...">
+                        </div>
+                        <button class="btn-primary" id="btn-search-vets">Search Clinics</button>
+                    </div>
+
+                    <!-- Map and List Split Layout -->
+                    <div class="vet-layout-split">
+                        <!-- Interactive Leaflet Map Container -->
+                        <div class="map-container">
+                            <div id="leaflet-vet-map"></div>
+                        </div>
+
+                        <!-- Clinics Cards List -->
+                        <div class="clinics-list-wrap">
+                            <div class="clinics-list-header">
+                                <h3 id="clinics-count-text">Veterinary Clinics (4 found)</h3>
+                            </div>
+                            <div class="clinics-cards-container" id="clinics-cards-container">
+                                <!-- Cards rendered by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: REMINDERS & SCHEDULE -->
+            <section class="tab-pane" id="pane-reminders">
+                <div class="reminders-wrapper">
+                    <div class="reminders-header">
+                        <h2>Pet Care Schedule & Reminders</h2>
+                        <p>Track meal times, medication schedules, grooming sessions, and vet checkups.</p>
+                    </div>
+
+                    <div class="reminders-actions">
+                        <button class="btn-primary" id="btn-open-add-reminder">
+                            <i class="fa-solid fa-plus"></i> Add New Reminder
+                        </button>
+                    </div>
+
+                    <!-- Active Reminders List -->
+                    <div class="reminders-list" id="reminders-list-container">
+                        <!-- Reminders populated by JS -->
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="app-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <i class="fa-solid fa-paw text-teal"></i> <strong>PawGuide</strong> — Built for First-Time Pet Parents
+            </div>
+            <p class="footer-disclaimer">
+                PawGuide provides general care information and is not a substitute for professional veterinary advice, diagnosis, or treatment. Never surface or administer unprescribed medications.
+            </p>
+        </div>
+    </footer>
+
+    <!-- ONBOARDING STEPPER MODAL -->
+    <div class="modal-backdrop hidden" id="modal-onboarding">
+        <div class="modal-card onboarding-card">
+            <div class="onboarding-header">
+                <h2>Welcome to PawGuide! 🐾</h2>
+                <p>Let's set up your pet profile to generate your personalized care guide.</p>
+            </div>
+
+            <form id="onboarding-form">
+                <!-- Step 1: Species & Name -->
+                <div class="ob-step active" data-step="1">
+                    <h3>Step 1: Basic Info</h3>
+                    <div class="form-group">
+                        <label>What species is your pet?</label>
+                        <div class="species-selector">
+                            <label class="species-card active" id="species-dog-card">
+                                <input type="radio" name="species" value="Dog" checked hidden>
+                                <i class="fa-solid fa-dog"></i>
+                                <span>Dog</span>
+                            </label>
+                            <label class="species-card" id="species-cat-card">
+                                <input type="radio" name="species" value="Cat" hidden>
+                                <i class="fa-solid fa-cat"></i>
+                                <span>Cat</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pet-name">Pet's Name</label>
+                        <input type="text" id="pet-name" placeholder="e.g. Buddy, Luna, Max" required value="Buddy">
+                    </div>
+
+                    <button type="button" class="btn-primary btn-full margin-top-md btn-next-step">Next: Breed & Age <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+
+                <!-- Step 2: Breed, Age, Weight -->
+                <div class="ob-step" data-step="2">
+                    <h3>Step 2: Breed, Age & Weight</h3>
+
+                    <div class="form-group">
+                        <label for="breed-input">Breed (Searchable)</label>
+                        <div class="autocomplete-wrap">
+                            <input type="text" id="breed-input" placeholder="Search breed (e.g. Golden Retriever)..." autocomplete="off" value="Golden Retriever">
+                            <div class="autocomplete-dropdown hidden" id="breed-autocomplete-results"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-half">
+                            <label for="age-years">Age (Years)</label>
+                            <input type="number" id="age-years" step="0.1" min="0.1" max="25" value="2" required>
+                        </div>
+                        <div class="form-group col-half">
+                            <label for="weight-kg">Weight (kg)</label>
+                            <input type="number" id="weight-kg" step="0.1" min="0.2" max="100" value="30" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-half">
+                            <label for="pet-sex">Sex</label>
+                            <select id="pet-sex">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-half">
+                            <label for="pet-neutered">Spayed / Neutered?</label>
+                            <select id="pet-neutered">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-nav-row">
+                        <button type="button" class="btn-secondary btn-prev-step"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                        <button type="button" class="btn-primary btn-next-step" id="btn-ob-step2-next">Next: Lifestyle <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Activity & Health Details -->
+                <div class="ob-step" data-step="3">
+                    <h3>Step 3: Lifestyle & Health</h3>
+
+                    <div class="form-group">
+                        <label for="activity-level">Activity Level</label>
+                        <select id="activity-level">
+                            <option value="High">High (Very Active / Energetic)</option>
+                            <option value="Medium" selected>Medium (Moderate Play & Walks)</option>
+                            <option value="Low">Low (Calm / Indoor Couch Potato)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="allergies-input">Known Allergies (comma separated)</label>
+                        <input type="text" id="allergies-input" placeholder="e.g. Chicken, Dairy, Dust Mites">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="conditions-input">Existing Conditions (comma separated)</label>
+                        <input type="text" id="conditions-input" placeholder="e.g. Sensitive Stomach, Joint Stiffness">
+                    </div>
+
+                    <div class="form-nav-row">
+                        <button type="button" class="btn-secondary btn-prev-step"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                        <button type="submit" class="btn-primary" id="btn-submit-onboarding">Generate Care Guide ✨</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- SECTION 2.1 AGE-BASED FEEDING POPUP / TOAST MODAL -->
+    <div class="modal-backdrop hidden" id="modal-feeding-alert">
+        <div class="modal-card alert-modal-card">
+            <div class="alert-modal-icon icon-amber">
+                <i class="fa-solid fa-bowl-food"></i>
+            </div>
+            <div class="alert-modal-content">
+                <h3 id="feeding-alert-title">Young Pet — Feeding Schedule Matters</h3>
+                <p id="feeding-alert-message">
+                    At 4 months old, your pet should be fed 3-4 times a day in small-moderate amounts — not the same as an adult meal schedule. We'll build this into your care guide, and you can set meal-time reminders below.
+                </p>
+            </div>
+            <div class="alert-modal-actions">
+                <button class="btn-primary" id="btn-alert-set-reminders">
+                    <i class="fa-solid fa-bell"></i> Set Meal Reminders
+                </button>
+                <button class="btn-secondary" id="btn-alert-continue">
+                    Continue to Care Guide
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: ADD REMINDER -->
+    <div class="modal-backdrop hidden" id="modal-add-reminder">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-plus-circle text-teal"></i> Add New Reminder</h3>
+                <button class="btn-close-modal" data-close="modal-add-reminder">&times;</button>
+            </div>
+            <form id="form-add-reminder">
+                <div class="form-group">
+                    <label for="rem-title">Reminder Title</label>
+                    <input type="text" id="rem-title" placeholder="e.g. Morning Meal, Vaccine Booster" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-half">
+                        <label for="rem-time">Time</label>
+                        <input type="time" id="rem-time" value="08:00" required>
+                    </div>
+                    <div class="form-group col-half">
+                        <label for="rem-category">Category</label>
+                        <select id="rem-category">
+                            <option value="Feeding">Feeding</option>
+                            <option value="Vaccination">Vaccination</option>
+                            <option value="Grooming">Grooming</option>
+                            <option value="Vet Visit">Vet Visit</option>
+                            <option value="General">General</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" data-close="modal-add-reminder">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Reminder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- DETAIL MODALS FOR DASHBOARD CARDS -->
+    <div class="modal-backdrop hidden" id="modal-feeding-detail">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-bowl-food text-teal"></i> Complete Nutrition Breakdown</h3>
+                <button class="btn-close-modal" data-close="modal-feeding-detail">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-feeding-body">
+                <!-- Rendered dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop hidden" id="modal-exercise-detail">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-person-running text-teal"></i> Exercise & Play Guidance</h3>
+                <button class="btn-close-modal" data-close="modal-exercise-detail">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-exercise-body">
+                <!-- Rendered dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop hidden" id="modal-grooming-detail">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-shower text-teal"></i> Coat Grooming & Hygiene Guide</h3>
+                <button class="btn-close-modal" data-close="modal-grooming-detail">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-grooming-body">
+                <!-- Rendered dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop hidden" id="modal-health-detail">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-notes-medical text-teal"></i> Vaccine Schedule & Breed Watchlist</h3>
+                <button class="btn-close-modal" data-close="modal-health-detail">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-health-body">
+                <!-- Rendered dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS for Maps -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <!-- Application Logic -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+{
+  "Dog": {
+    "Puppy": {
+      "daily_calories_per_kg": 90,
+      "meals_per_day": 3,
+      "recommended_food_type": "High-protein Puppy Formula (Growth AAFCO approved dry or wet kibble)",
+      "foods_to_avoid": [
+        "Chocolate (Theobromine)",
+        "Grapes & Raisins (Kidney Failure Risk)",
+        "Onions, Garlic & Chives (Thiosulfate Toxic)",
+        "Xylitol / Birch Sugar (Artificial Sweetener)",
+        "Avocado (Persin Poisoning)",
+        "Macadamia Nuts",
+        "Cooked Bones (Splinter Risk)",
+        "Alcohol & Caffeine",
+        "Raw Dough & Yeast",
+        "High-Sodium Foods"
+      ]
+    },
+    "Adult": {
+      "daily_calories_per_kg": 60,
+      "meals_per_day": 2,
+      "recommended_food_type": "Complete & Balanced Adult Dog Food (protein 22-26%, healthy fat 10-15%)",
+      "foods_to_avoid": [
+        "Chocolate",
+        "Grapes & Raisins",
+        "Onions & Garlic",
+        "Xylitol",
+        "Avocado",
+        "Macadamia Nuts",
+        "Cooked Bones",
+        "Caffeine & Alcohol",
+        "Excessive Table Scraps"
+      ]
+    },
+    "Senior": {
+      "daily_calories_per_kg": 45,
+      "meals_per_day": 2,
+      "recommended_food_type": "Senior Formula with Joint Supplements (Glucosamine/Chondroitin, Digestible Protein, Lower Calorie Density)",
+      "foods_to_avoid": [
+        "Chocolate",
+        "Grapes & Raisins",
+        "Onions & Garlic",
+        "Xylitol",
+        "High-Sodium Foods",
+        "Hard Fatty Treats",
+        "Cooked Bones"
+      ]
+    }
+  },
+  "Cat": {
+    "Kitten": {
+      "daily_calories_per_kg": 100,
+      "meals_per_day": 4,
+      "recommended_food_type": "Nutrient-Dense Kitten Formula (High Protein > 35%, DHA for brain development, wet & dry blend)",
+      "foods_to_avoid": [
+        "Chocolate & Caffeine",
+        "Onions, Garlic & Shallots",
+        "Grapes & Raisins",
+        "Xylitol",
+        "Cow's Milk (Lactose Intolerance Risk)",
+        "Raw Fish / Raw Meat (Salmonella & Thiaminase Risk)",
+        "Dog Food (Lacks essential Taurine)"
+      ]
+    },
+    "Adult": {
+      "daily_calories_per_kg": 70,
+      "meals_per_day": 2,
+      "recommended_food_type": "High-Protein Adult Feline Diet with Taurine (Wet food recommended for kidney & urinary hydration)",
+      "foods_to_avoid": [
+        "Chocolate & Caffeine",
+        "Onions & Garlic",
+        "Grapes & Raisins",
+        "Xylitol",
+        "Cow's Milk",
+        "Raw Pork or Fish",
+        "Dog Food"
+      ]
+    },
+    "Senior": {
+      "daily_calories_per_kg": 55,
+      "meals_per_day": 2,
+      "recommended_food_type": "Highly Digestible Senior Cat Food (Wet diet with kidney support, phosphorus control & high moisture)",
+      "foods_to_avoid": [
+        "Chocolate",
+        "Onions & Garlic",
+        "Grapes & Raisins",
+        "Xylitol",
+        "Cow's Milk",
+        "High Sodium Treats"
+      ]
+    }
+  }
+}
